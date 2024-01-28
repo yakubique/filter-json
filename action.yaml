@@ -1,0 +1,22 @@
+name: "Filter JSON"
+description: This GitHub Action is designed to filter specified values from an input JSON. Its main task is to extract and retain only the desired values based on predefined criteria.
+author: Vladimir Levin
+branding:
+  icon: code
+  color: purple
+inputs:
+  input:
+    description: 'JSON to filter'
+    required: true
+  type:
+    description: 'Type of input data `["flat-json", "nested-json"]` (default: "flat-json")'
+  key:
+    description: If `type="nested-json"` - which key should be used
+  values:
+    description: Values to filter from JSON, comma separated
+outputs:
+  result: # id of output
+    description: Input JSON minus `values`
+runs:
+  using: 'node20'
+  main: 'action/index.js'
