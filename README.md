@@ -1,5 +1,5 @@
 # filter-json
-This GitHub Action is designed to filter specified values from an input JSON. Its main task is to extract and retain only the desired values based on predefined criteria.
+GitHub Action filters JSON values based on predefined criteria, extracting and retaining desired values.
 
 ## Usage
 

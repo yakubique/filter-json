@@ -1,7 +1,7 @@
 {
   "name": "filter-json",
   "version": "1.0.0",
-  "description": "This GitHub Action is designed to filter specified values from an input JSON. Its main task is to extract and retain only the desired values based on predefined criteria.",
+  "description": "GitHub Action filters JSON values based on predefined criteria, extracting and retaining desired values.",
   "main": "action/index.js",
   "scripts": {
     "test": "yarn build && node ./action/index.js",
