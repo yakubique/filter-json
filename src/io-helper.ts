@@ -1,10 +1,13 @@
 import * as core from '@actions/core';
+import { getBooleanInput, getOptional } from '@yakubique/atils/dist';
 
 enum Inputs {
     Input = 'input',
     Type = 'type',
     Key = 'key',
     Values = 'values',
+    FromFile = 'from_file',
+    ToFile = 'to_file',
 }
 
 export enum Types {
@@ -12,39 +15,31 @@ export enum Types {
     NestedJSON = 'nested-json'
 }
 
-function isBlank(value: any): boolean {
-    return value === null || value === undefined || (value.length !== undefined && value.length === 0);
-}
-
-export function isNotBlank(value: any): boolean {
-    return value !== null && value !== undefined && (value.length === undefined || value.length > 0);
-}
 
 export interface ActionInputs {
     input: string;
     type: string;
     key: string;
     values: string[];
+    fromFile: boolean;
+    toFile: boolean;
 }
 
 export function getInputs(): ActionInputs {
     const result: ActionInputs | any = {};
 
-    result.input = `${core.getInput(Inputs.Input, { required: true })}`
-
-    const typeVar = core.getInput(Inputs.Type, { required: false })
-    if (isBlank(typeVar)) {
-        result.type = Types.FlatJSON
-    } else {
-        result.type = typeVar
-    }
+    result.input = `${core.getInput(Inputs.Input, { required: true })}`;
+    result.type = getOptional(Inputs.Type, Types.FlatJSON, { required: false });
 
     if (result.type == Types.NestedJSON) {
-        result.key = core.getInput(Inputs.Key, { required: true })
+        result.key = core.getInput(Inputs.Key, { required: true });
     }
 
-    const values = core.getInput(Inputs.Values, { required: false })
-    result.values = values.split(",");
+    const values = core.getInput(Inputs.Values, { required: true });
+    result.values = values.split(',');
+
+    result.fromFile = getBooleanInput(Inputs.FromFile, { required: false });
+    result.toFile = getBooleanInput(Inputs.ToFile, { required: false });
 
     return result;
 }

@@ -10,13 +10,20 @@ inputs:
     required: true
   type:
     description: 'Type of input data `["flat-json", "nested-json"]` (default: "flat-json")'
+    default: "flat-json"
   key:
     description: If `type="nested-json"` - which key should be used
   values:
     description: Values to filter from JSON, comma separated
+    required: true
+  from_file:
+    description: Get JSON from file
+    default: "false"
+  to_file:
+    description: Output to JSON file
 outputs:
-  result: # id of output
-    description: Input JSON minus `values`
+  result:
+    description: Input JSON minus `values` (JSON or filepath, depends on `to_file`)
 runs:
   using: 'node20'
   main: 'action/index.js'
