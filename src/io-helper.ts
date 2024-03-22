@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import { getBooleanInput, getOptional } from '@yakubique/atils/dist';
 
-enum Inputs {
+export enum Inputs {
     Input = 'input',
     Type = 'type',
     Key = 'key',
@@ -26,7 +26,7 @@ export interface ActionInputs {
 }
 
 export function getInputs(): ActionInputs {
-    const result: ActionInputs | any = {};
+    const result: ActionInputs = {} as ActionInputs;
 
     result.input = `${core.getInput(Inputs.Input, { required: true })}`;
     result.type = getOptional(Inputs.Type, Types.FlatJSON, { required: false });
